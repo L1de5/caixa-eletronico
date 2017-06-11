@@ -66,36 +66,40 @@ function ATM(){
        if(valor%100 != valor){
          for(c1 = 0;r >= 100 && this.ncem > 0; c1++){
            r -= 100;
+           this.ncem--;
          }
        }
        if(valor%50 != valor){
          for(c2 = 0;r >= 50 && this.ncinq > 0; c2++){
            r -= 50;
+           this.ncinq--;
          }
        }
        if(valor%20 != valor){
          for(c3 = 0;r >= 20 && this.nvinte > 0; c3++){
            r -= 20;
+           this.nvinte--;
          }
        }
        if(valor%10 != valor){
          for(c4 = 0;r >= 10 && this.ndez > 0; c4++){
            r -= 10;
+           this.ndez--;
          }
        }
        if(valor%5 != valor){
          for(c5 = 0;r >= 5 && this.ncinco > 0; c5++){
            r -= 5;
+           this.ncinco--;
          }
        }
-       if(r === 0){
-         this.ncem -= c1;
-         this.ncinq -= c2;
-         this.nvinte -= c3;
-         this.ndez -= c4;
-         this.ncinco -= c5;
-         total -= valor;
-       }
+       if(r !== 0){
+         this.ncem += c1;
+         this.ncinq += c2;
+         this.nvinte += c3;
+         this.ndez += c4;
+         this.ncinco += c5;
+       }else total -= valor;
      }
    }
 }
@@ -156,9 +160,33 @@ console.log(atm.consultarQuantidade(50) === 7);
 console.log(atm.consultarValor() === 410); // 6 * 10 + 7 * 50
 
 // até aqui 0.7 ponto <=========================================
+atm.retirar(410);
+atm.abastecer(2, 100);
+atm.abastecer(2, 50);
+atm.abastecer(2, 20);
+atm.abastecer(2, 10);
+atm.abastecer(2, 5);
+console.log(atm.consultarQuantidade(100) === 2);
+console.log(atm.consultarQuantidade(50) === 2);
+console.log(atm.consultarQuantidade(20) === 2);
+console.log(atm.consultarQuantidade(10) === 2);
+console.log(atm.consultarQuantidade(5) === 2);
+console.log(atm.consultarValor() === 370);
 
-// incluir mais 10 casos de teste com retiradas
-// quem combinam 4 e 5 cédulas diferentes, válidas e inválidas
-// -------------------------------------------------------------
+atm.retirar(195);
+console.log(atm.consultarQuantidade(100) === 1);
+console.log(atm.consultarQuantidade(50) === 1);
+console.log(atm.consultarQuantidade(20) === 0);
+console.log(atm.consultarQuantidade(10) === 2);
+console.log(atm.consultarQuantidade(5) === 1);
+console.log(atm.consultarValor() === 175);
+
+atm.retirar(190);
+console.log(atm.consultarQuantidade(100) === 1);
+console.log(atm.consultarQuantidade(50) === 1);
+console.log(atm.consultarQuantidade(20) === 0);
+console.log(atm.consultarQuantidade(10) === 2);
+console.log(atm.consultarQuantidade(5) === 1);
+console.log(atm.consultarValor() === 175);
 
 // até aqui 1.0 ponto <=========================================
